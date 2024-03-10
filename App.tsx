@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Animated, {
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
@@ -11,7 +12,13 @@ import Animated, {
 export default function App() {
   const p = useSharedValue(0);
   useEffect(() => {
-    p.value = withRepeat(withTiming(1, { duration: 1000 }), -1, true);
+    p.value = withRepeat(
+      withTiming(1, { duration: 1000, reduceMotion: ReduceMotion.Never }),
+      -1,
+      true,
+      undefined,
+      ReduceMotion.Never
+    );
   }, []);
 
   const style = useAnimatedStyle(() => {
